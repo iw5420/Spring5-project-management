@@ -1,9 +1,12 @@
 package com.jrp.pma.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Project {
@@ -18,16 +21,28 @@ public class Project {
 	
 	private String description;
 	
+	//一個專案可以對到多個員工(會多建一個關聯表)
+	@OneToMany(mappedBy="Project")
+	private List<Employee> employees;
+	
 	public Project() {
 		
 	}
 
-	public Project(long projectId, String name, String stage, String description) {
+	public Project(String name, String stage, String description) {
 		super();
-		this.projectId = projectId;
 		this.name = name;
 		this.stage = stage;
 		this.description = description;
+	}
+
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 	public long getProjectId() {

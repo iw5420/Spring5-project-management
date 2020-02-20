@@ -1,21 +1,28 @@
 package com.jrp.pma.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long emplyeeId;
+	private long employeeId;
 	
 	private String firstName;
 	private String lastName;
 	private String email;
 	
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST},fetch= FetchType.LAZY)
+	@JoinColumn(name="project_id")
+	private Project Project;
 	
 	
 	public Employee() {
@@ -24,9 +31,6 @@ public class Employee {
 	}
 	//如果要資料庫自動產生EmployeeId就會需要這個Constructor不填 
 
-	public long getEmplyeeId() {
-		return emplyeeId;
-	}
 	
 	public Employee(String firstName, String lastName, String email) {
 		super();
@@ -35,10 +39,24 @@ public class Employee {
 		this.email = email;
 	}
 	
-	public void setEmplyeeId(long emplyeeId) {
-		this.emplyeeId = emplyeeId;
+	
+	public long getEmployeeId() {
+		return employeeId;
 	}
 
+
+	public void setEmployeeId(long employeeId) {
+		this.employeeId = employeeId;
+	}
+
+
+	public Project getProject() {
+		return Project;
+	}
+
+	public void setProject(Project project) {
+		Project = project;
+	}
 
 
 	public String getFirstName() {
