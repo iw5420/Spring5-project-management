@@ -12,7 +12,7 @@ public class Project {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long projectId;
 	
-	private String nmae;
+	private String name;
 	
 	private String stage; // NOTSTARTED, COMPLETED, INPROGRESS
 	
@@ -21,37 +21,45 @@ public class Project {
 	public Project() {
 		
 	}
-	
-	public Project(String nmae, String stage, String description) {
+
+	public Project(long projectId, String name, String stage, String description) {
 		super();
-		this.nmae = nmae;
+		this.projectId = projectId;
+		this.name = name;
 		this.stage = stage;
 		this.description = description;
 	}
-	
+
 	public long getProjectId() {
 		return projectId;
 	}
+
 	public void setProjectId(long projectId) {
 		this.projectId = projectId;
 	}
-	public String getNmae() {
-		return nmae;
+
+	public String getName() {
+		return name;
 	}
-	public void setNmae(String nmae) {
-		this.nmae = nmae;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	public String getStage() {
 		return stage;
 	}
+
 	public void setStage(String stage) {
 		this.stage = stage;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
-	}
+	}	
 	
 }
