@@ -1,5 +1,7 @@
 package com.jrp.pma.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,9 +24,10 @@ public class Employee {
 	private String lastName;
 	private String email;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST},fetch= FetchType.LAZY)
-	@JoinColumn(name="project_id")
-	private Project Project;
+	//@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST},fetch= FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST},fetch= FetchType.LAZY)
+	@JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+	private List<Project> Project;
 	
 	
 	public Employee() {
@@ -50,11 +55,12 @@ public class Employee {
 	}
 
 
-	public Project getProject() {
+	public List<Project> getProject() {
 		return Project;
 	}
 
-	public void setProject(Project project) {
+
+	public void setProject(List<Project> project) {
 		Project = project;
 	}
 
