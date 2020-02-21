@@ -28,8 +28,7 @@ public class ProjectController {
 	@GetMapping
 	public String displayProject(Model model) {
 
-		Project Projects = new Project();
-
+		List<Project> Projects= proRepo.findAll();
 		model.addAttribute("projects", Projects);
 
 		return "projects/list-projects";
